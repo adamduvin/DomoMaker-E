@@ -1,4 +1,5 @@
 "use strict";
+"use strict";
 
 var handleDomo = function handleDomo(e) {
     e.preventDefault();
@@ -39,8 +40,41 @@ var DomoForm = function DomoForm(props) {
             "Age: "
         ),
         React.createElement("input", { id: "domoAge", type: "text", name: "age", placeholder: "Domo Age" }),
+        React.createElement(
+            "label",
+            { htmlFor: "Height" },
+            "Height: "
+        ),
+        React.createElement("input", { id: "domoHeight", type: "text", name: "height", placeholder: "Domo Height" }),
         React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
         React.createElement("input", { className: "makeDomoSubmit", type: "submit", value: "Make Domo" })
+    );
+};
+
+var GameForm = function GameForm(props) {
+    return React.createElement(
+        "form",
+        { id: "gameForm",
+            onSubmit: handleGame,
+            name: "gameForm",
+            action: "/game",
+            method: "POST",
+            className: "gameForm"
+        },
+        React.createElement(
+            "label",
+            { htmlFor: "gameName" },
+            "Game Name: "
+        ),
+        React.createElement("input", { id: "gameName", type: "text", name: "gameName", placeholder: "Game Name" }),
+        React.createElement(
+            "label",
+            { htmlFor: "gamePassword" },
+            "Game Password: "
+        ),
+        React.createElement("input", { id: "gamePassword", type: "text", name: "gamePassword", placeholder: "Game Password" }),
+        React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
+        React.createElement("input", { className: "makeGameSubmit", type: "submit", value: "Make Game" })
     );
 };
 
@@ -74,6 +108,13 @@ var DomoList = function DomoList(props) {
                 { className: "domoAge" },
                 " Age: ",
                 domo.age,
+                " "
+            ),
+            React.createElement(
+                "h3",
+                { className: "domoHeight" },
+                " Height: ",
+                domo.height,
                 " "
             )
         );
