@@ -1,4 +1,137 @@
 "use strict";
+
+var handleGame = function handleGame(e) {
+    e.preventDefault();
+
+    /*$("#gameMessage").animate({width:'hide'},350);
+      if($("#gameName").val() == '' || $("#gameAge").val() == ''){
+        handleError("RAWR! All fields are required");
+        return false;
+    }
+      sendAjax('POST', $("#gameForm").attr("action"), $("#gameForm").serialize(), function(){
+        loadGamesFromServer();
+    });*/
+
+    return false;
+};
+
+/*const GameForm = (props) => {
+    return (
+        <form id="gameForm"
+        onSubmit={handleGame}
+        name="gameForm"
+        action="/maker"
+        method="POST"
+        className="gameForm"
+        >
+            <label htmlFor="name">Name: </label>
+            <input id="gameName" type="text" name="name" placeholder="Game Name"/>
+            <label htmlFor="age">Age: </label>
+            <input id="gameAge" type="text" name="age" placeholder="Game Age"/>
+            <label htmlFor="Height">Height: </label>
+            <input id="gameHeight" type="text" name="height" placeholder="Game Height"/>
+            <input type="hidden" name="_csrf" value={props.csrf} />
+            <input className="makeGameSubmit" type="submit" value="Make Game" />
+        </form>
+    );
+};
+
+const GameForm = (props) => {
+    return (
+        <form id="gameForm"
+        onSubmit={handleGame}
+        name="gameForm"
+        action="/game"
+        method="POST"
+        className="gameForm"
+        >
+            <label htmlFor="gameName">Game Name: </label>
+            <input id="gameName" type="text" name="gameName" placeholder="Game Name"/>
+            <label htmlFor="gamePassword">Game Password: </label>
+            <input id="gamePassword" type="text" name="gamePassword" placeholder="Game Password"/>
+            <input type="hidden" name="_csrf" value={props.csrf} />
+            <input className="makeGameSubmit" type="submit" value="Make Game" />
+        </form>
+    );
+};*/
+
+var PlayerList = function PlayerList(props) {
+    if (props.players.length === 0) {
+        return React.createElement(
+            "div",
+            { className: "playerList" },
+            React.createElement(
+                "h3",
+                { className: "emptyPlayerList" },
+                "No Players In Game"
+            )
+        );
+    }
+
+    var playerNodes = props.players.map(function (player) {
+        return React.createElement(
+            "div",
+            { key: player._id, className: "player" },
+            React.createElement(
+                "h3",
+                { className: "playerName" },
+                " Name: ",
+                player.name,
+                " "
+            ),
+            React.createElement(
+                "h3",
+                { className: "playerCharacterName" },
+                " Character: ",
+                player.characterName,
+                " "
+            ),
+            React.createElement(
+                "h3",
+                { className: "playerCharacterLevel" },
+                " Level: ",
+                player.characterLevel,
+                " "
+            )
+        );
+    });
+
+    return React.createElement(
+        "div",
+        { className: "playerList" },
+        playerNodes
+    );
+};
+
+var addPlayersToGame = function addPlayersToGame() {
+    // Have joining players make a POST request to add them to the game
+
+    /*sendAjax('GET', '/getGames', null, (data) => {
+        ReactDOM.render(
+            <PlayerList games={data.games} />, document.querySelector("#games")
+        );
+    });*/
+};
+
+var setup = function setup(csrf) {
+    ReactDOM.render(React.createElement(GameForm, { csrf: csrf }), document.querySelector("#makeGame"));
+
+    ReactDOM.render(React.createElement(GameForm, { csrf: csrf }), document.querySelector("#makeGame"));
+
+    ReactDOM.render(React.createElement(GameList, { games: [] }), document.querySelector("#games"));
+
+    loadGamesFromServer();
+};
+
+var getToken = function getToken() {
+    sendAjax('GET', '/getToken', null, function (result) {
+        setup(result.csrfToken);
+    });
+};
+
+$(document).ready(function () {
+    getToken();
+});
 "use strict";
 
 var handleDomo = function handleDomo(e) {
@@ -6,7 +139,24 @@ var handleDomo = function handleDomo(e) {
 
     $("#domoMessage").animate({ width: 'hide' }, 350);
 
-    if ($("#domoName").val() == '' || $("#domoAge").val() == '') {
+    if ($("#domoName").val() == '' || $("#domoAge").val() == '' || $("#domoAge".val() == '')) {
+        handleError("RAWR! All fields are required");
+        return false;
+    }
+
+    sendAjax('POST', $("#domoForm").attr("action"), $("#domoForm").serialize(), function () {
+        loadDomosFromServer();
+    });
+
+    return false;
+};
+
+var handleGame = function handleGame(e) {
+    e.preventDefault();
+
+    //$("#domoMessage").animate({width:'hide'},350);
+
+    if ($("#domoName").val() == '' || $("#domoAge").val() == '' || $("#domoAge".val() == '')) {
         handleError("RAWR! All fields are required");
         return false;
     }
@@ -135,6 +285,8 @@ var loadDomosFromServer = function loadDomosFromServer() {
 
 var setup = function setup(csrf) {
     ReactDOM.render(React.createElement(DomoForm, { csrf: csrf }), document.querySelector("#makeDomo"));
+
+    ReactDOM.render(React.createElement(GameForm, { csrf: csrf }), document.querySelector("#makeGame"));
 
     ReactDOM.render(React.createElement(DomoList, { domos: [] }), document.querySelector("#domos"));
 

@@ -47,7 +47,7 @@ const getGames = (request, response) => {
   const req = request;
   const res = response;
 
-  return Game.GameModel.findByOwner(req.session.account._id, (err, docs) => {
+  return Game.GameModel.findByGameName(req.session.account._id, (err, docs) => {
     if (err) {
       console.log(err);
       return res.status(400).json({ error: 'An error occurred' });

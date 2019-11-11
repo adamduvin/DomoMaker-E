@@ -3,7 +3,24 @@ const handleDomo = (e) => {
 
     $("#domoMessage").animate({width:'hide'},350);
 
-    if($("#domoName").val() == '' || $("#domoAge").val() == ''){
+    if($("#domoName").val() == '' || $("#domoAge").val() == '' || $("#domoAge".val() == '')){
+        handleError("RAWR! All fields are required");
+        return false;
+    }
+
+    sendAjax('POST', $("#domoForm").attr("action"), $("#domoForm").serialize(), function(){
+        loadDomosFromServer();
+    });
+
+    return false;
+}
+
+const handleGame = (e) => {
+    e.preventDefault();
+
+    //$("#domoMessage").animate({width:'hide'},350);
+
+    if($("#domoName").val() == '' || $("#domoAge").val() == '' || $("#domoAge".val() == '')){
         handleError("RAWR! All fields are required");
         return false;
     }
@@ -93,6 +110,10 @@ const loadDomosFromServer = () => {
 const setup = function(csrf) {
     ReactDOM.render(
         <DomoForm csrf={csrf} />, document.querySelector("#makeDomo")
+    );
+
+    ReactDOM.render(
+        <GameForm csrf={csrf} />, document.querySelector("#makeGame")
     );
 
     ReactDOM.render(
