@@ -156,14 +156,13 @@ var handleGame = function handleGame(e) {
 
     //$("#domoMessage").animate({width:'hide'},350);
 
-    if ($("#domoName").val() == '' || $("#domoAge").val() == '' || $("#domoAge".val() == '')) {
+    /*if($("#domoName").val() == '' || $("#domoAge").val() == '' || $("#domoAge".val() == '')){
         handleError("RAWR! All fields are required");
         return false;
     }
-
-    sendAjax('POST', $("#domoForm").attr("action"), $("#domoForm").serialize(), function () {
+      sendAjax('POST', $("#domoForm").attr("action"), $("#domoForm").serialize(), function(){
         loadDomosFromServer();
-    });
+    });*/
 
     return false;
 };
@@ -217,12 +216,6 @@ var GameForm = function GameForm(props) {
             "Game Name: "
         ),
         React.createElement("input", { id: "gameName", type: "text", name: "gameName", placeholder: "Game Name" }),
-        React.createElement(
-            "label",
-            { htmlFor: "gamePassword" },
-            "Game Password: "
-        ),
-        React.createElement("input", { id: "gamePassword", type: "text", name: "gamePassword", placeholder: "Game Password" }),
         React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
         React.createElement("input", { className: "makeGameSubmit", type: "submit", value: "Make Game" })
     );

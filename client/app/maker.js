@@ -13,24 +13,24 @@ const handleDomo = (e) => {
     });
 
     return false;
-}
+};
 
 const handleGame = (e) => {
     e.preventDefault();
 
     //$("#domoMessage").animate({width:'hide'},350);
 
-    if($("#domoName").val() == '' || $("#domoAge").val() == '' || $("#domoAge".val() == '')){
+    /*if($("#domoName").val() == '' || $("#domoAge").val() == '' || $("#domoAge".val() == '')){
         handleError("RAWR! All fields are required");
         return false;
     }
 
     sendAjax('POST', $("#domoForm").attr("action"), $("#domoForm").serialize(), function(){
         loadDomosFromServer();
-    });
+    });*/
 
     return false;
-}
+};
 
 const DomoForm = (props) => {
     return (
@@ -64,8 +64,6 @@ const GameForm = (props) => {
         >
             <label htmlFor="gameName">Game Name: </label>
             <input id="gameName" type="text" name="gameName" placeholder="Game Name"/>
-            <label htmlFor="gamePassword">Game Password: </label>
-            <input id="gamePassword" type="text" name="gamePassword" placeholder="Game Password"/>
             <input type="hidden" name="_csrf" value={props.csrf} />
             <input className="makeGameSubmit" type="submit" value="Make Game" />
         </form>

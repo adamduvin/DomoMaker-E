@@ -1,12 +1,14 @@
 const requiresLogin = (req, res, next) => {
-  if (!req.session.account) {
+  if (!req.session.account || !req.session.accountGM) {
     return res.redirect('/');
   }
   return next();
 };
 
+// Might need to make a special function for GM accounts
+
 const requiresLogout = (req, res, next) => {
-  if (req.session.account) {
+  if (req.session.account || req.session.accountGM) {
     return res.redirect('/maker');
   }
 

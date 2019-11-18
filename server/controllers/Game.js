@@ -14,22 +14,20 @@ const gamePage = (req, res) => {
 };
 
 const makeGame = (req, res) => {
-  if (!req.body.name || !req.body.age || !req.body.height) {
-    return res.status(400).json({ error: 'RAWR! Both name and age are required' });
+  if (!req.body.gameName /*|| !req.body.password*/) {
+    return res.status(400).json({ error: 'Name required' });
   }
 
   const gameData = {
-    name: req.body.name,
-    age: req.body.age,
-    height: req.body.height,
-    owner: req.session.account._id,
+    name: req.body.gameName,
+    //owner: req.session.account._id,
   };
 
   const newGame = new Game.GameModel(gameData);
 
   const gamePromise = newGame.save();
 
-  gamePromise.then(() => res.json({ redirect: '/maker' }));
+  gamePromise.then(() => res.json({ redirect: '/game' }));
 
   gamePromise.catch((err) => {
     console.log(err);

@@ -20,10 +20,10 @@ const GameSchema = new mongoose.Schema({
     type: Buffer,
     required: true,
   },
-  password: {
+  /*password: {
     type: String,
     required: true,
-  },
+  },*/
   players: {
     type: Object,
     required: true,
@@ -67,7 +67,7 @@ GameSchema.statics.generateHash = (password, callback) => {
   );
 };
 
-GameSchema.statics.authenticate = (gameName, password, callback) =>
+GameSchema.statics.authenticate = (gameName, callback) =>
 GameModel.findByGameName(gameName, (err, doc) => {
   if (err) {
     return callback(err);
